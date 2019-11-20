@@ -1,0 +1,21 @@
+dist: bionic
+language: c
+compiler: gcc
+
+env:
+  global:
+    - SHARE_ARTIFACTS=1
+  jobs:
+    - BUILD_DEVICES='PSG1218 NEWIFI3'
+
+before_script:
+  - chmod +x *.sh
+  - sudo apt-get update
+  - sudo apt-get install --no-install-recommends -y ecj fastjar java-propose-classpath
+
+jobs:
+  include:
+    - stage: Build
+      name: "Build openwrt"
+      script:
+        - bash ./build_nohup.sh

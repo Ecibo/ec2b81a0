@@ -1,0 +1,29 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps
+    working_directory: /home
+    resource_class: medium
+    environment:
+      BUILD_DEVICES: PSG1218 NEWIFI3
+      NO_TAIL_LOG: 'YES'
+      MAKE_THREADS: 2
+    steps:
+      - checkout
+      - run:
+          name: Setup
+          command: |
+            apt-get update
+            apt-get install -y sudo build-essential gawk gettext libelf-dev ecj fastjar java-propose-classpath
+            chown -R nobody:nogroup .
+            chmod +x *.sh
+      - run:
+          name: Compile
+          command: sudo -Eu nobody ./build_nohup.sh
+      - store_artifacts:
+          path: build.log.xz
+          destination: build.log.xz
+      - store_artifacts:
+          path: firmware/
+          destination: firmware

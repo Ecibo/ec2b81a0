@@ -1,0 +1,23 @@
+trigger:
+  - master
+
+jobs:
+  - job: build
+    pool:
+      vmImage: ubuntu-latest
+    timeoutInMinutes: 0
+    variables:
+      BUILD_DEVICES: PSG1218 NEWIFI3
+      NO_TAIL_LOG: 'YES'
+    steps:
+      - script: |
+          sudo apt-get update
+          sudo apt-get install -y subversion build-essential libncurses5-dev gettext libelf-dev ecj fastjar java-propose-classpath
+          chmod +x *.sh
+          ls -hl
+        displayName: Setup build environment
+      - script: bash ./build_nohup.sh
+        displayName: Compile Openwrt
+      - publish: $(Build.SourcesDirectory)/firmware
+        displayName: Store Artifacts
+        artifact: Openwrt Firmware

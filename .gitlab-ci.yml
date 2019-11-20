@@ -1,0 +1,22 @@
+image: buildpack-deps
+
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq sudo build-essential gawk gettext libelf-dev ecj fastjar java-propose-classpath
+  - chown -R nobody:nogroup .
+  - chmod +x *.sh
+
+build_openwrt:
+  stage: build
+  when: manual
+  variables:
+    BUILD_DEVICES: PSG1218 NEWIFI3
+    NO_TAIL_LOG: 'YES'
+  script:
+    - sudo -Eu nobody ./build_nohup.sh
+  artifacts:
+    paths:
+      - firmware
+      - build.log.xz
+    expire_in: 3 day
+    expose_as: openwrt build result

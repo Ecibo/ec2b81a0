@@ -1,0 +1,55 @@
+Newifi3:
+  Global build settings
+    Cryptographically signed package lists
+    Remove ipkg/opkg status data files in final images
+    Strip unnecessary exports from the kernel image
+    Strip unnecessary functions from libraries
+  Base system
+    blockd
+    opkg
+  Kernel modules
+    Filesystems
+      kmod-fs-btrfs
+      kmod-fs-exfat
+      kmod-fs-ext4
+      kmod-fs-f2fs
+      kmod-fs-hfs
+      kmod-fs-hfsplus
+      kmod-fs-isofs
+      kmod-fs-ntfs
+      kmod-fs-udf
+      kmod-fs-vfat
+      kmod-fs-xfs
+      kmod-fuse
+    USB Support
+      kmod-usb-printer
+      kmod-usb-storage-extras
+      kmod-usb-storage-uas
+      kmod-usb2
+  LuCI
+    Collections
+      luci
+    Applications
+      luci-app-hd-idle
+      luci-app-qos
+      luci-app-samba
+      luci-app-upnp
+
+PSG1218a:
+  Global build settings
+    Cryptographically signed package lists
+    Remove ipkg/opkg status data files in final images
+    Strip unnecessary exports from the kernel image
+    Strip unnecessary functions from libraries
+  Base system
+    dropbear
+    opkg
+  Kernel modules
+    Native Language Support
+      kmod-nls-utf8
+  LuCI
+    Collections
+      luci
+    Applications
+      luci-app-qos
+      luci-app-upnp
